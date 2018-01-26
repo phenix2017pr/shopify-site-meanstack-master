@@ -1,0 +1,36 @@
+.container.auth-form(ng-show='mode == "recover"')
+	form.well(role='form', name='recoverForm', ng-submit='recover()')
+		legend Recover Password
+		alert(type='{{alert.type}}', ng-if='alert.message') {{alert.message}}
+		fieldset(ng-disabled='processing')
+			.form-group(show-errors)
+				label(for='email') Email
+				input#email.form-control(type='email', name='email', ng-model='email', required, ng-maxlength='254', lowercase, autocomplete='off')
+				span.error(ng-show="recoverForm.email.$error.required") Email address is required.
+				span.error(ng-show="recoverForm.email.$error.maxlength || recoverForm.email.$error.email") Invalid email address.
+			.form-group
+					input.btn.btn-primary(type='submit', value='{{processing ? "Please wait.." : "Submit"}}', ng-disabled='recoverForm.$invalid')
+	p
+		| I&#x27;ve remembered my password! 
+		a(ui-sref='login') Return to login
+		
+.container.auth-form(ng-show='mode == "reset"')
+	form.well(role='form', name='resetForm', ng-submit='reset()')
+		legend Set Account Password
+		alert(type='{{alert.type}}', ng-if='alert.message') {{alert.message}}
+		fieldset(ng-disabled='processing')
+			.form-group(show-errors)
+				label(for='password') New Password
+				input#password.form-control(type='password', name='password', ng-model='password', password, autocomplete='off', required)
+				span.error(ng-show="resetForm.password.$error.required") New Password is required.
+				span.error.text-left(ng-show="resetForm.password.$error.password")
+					| Password must be between 8 and 45 characters, and must be a combination of at least one: uppercase, lowercase, numeric, and special (!@#$%^&*) characters.
+			.form-group(show-errors)
+				label(for='password2') Confirm New Password
+				input#password2.form-control(type='password', name='password2', ng-model='password2', required, compare='password', autocomplete='off')
+				span.error(ng-show="resetForm.password2.$error.required") New password confirmation is required.
+				span.error(ng-show="resetForm.password2.$error.compare && !resetForm.password2.$error.required") New password confirmation does not match.
+			.form-group
+				input.btn.btn-primary(type='submit', value='{{processing ? "Please wait.." : "Update and Login"}}', ng-disabled='resetForm.$invalid')
+	p
+		a(ui-sref='login') &#171; Home

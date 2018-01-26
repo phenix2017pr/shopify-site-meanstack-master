@@ -1,0 +1,35 @@
+.modal-header
+	button.close(ng-click='$close()') &#215; 
+	h3.modal-title ORDER {{"#" + order.number}}
+.modal-body
+	.row
+		.col-xs-12.col-sm-5.col-md-4
+			p 
+				b Placed: 
+				| {{order.created | date}}
+			p
+				b Shopify ID: 
+				a(ng-href='https://mealmade.myshopify.com/admin/orders/{{order.id}}', target='_blank') {{order.id}}
+			p(ng-if='order.dispatch.id')
+				b Sidecar ID: 
+				a(ng-href='https://delivery.side.cr/shipper/v0/ui/details?id={{order.dispatch.id}}', target='_blank') {{order.dispatch.id}}
+			br
+			p
+				| Deliver to:
+				br
+				| {{order.dispatch.dropoff.address.name}} {{order.dispatch.dropoff.address.company}}
+				br
+				| {{order.dispatch.dropoff.address.street1}} {{order.dispatch.dropoff.address.street2}}
+				br
+				| {{order.dispatch.dropoff.address.city}}, {{order.dispatch.dropoff.address.state}}  {{order.dispatch.dropoff.address.zip}}
+			br
+			p Phone: 
+				a(ng-href='tel:{{order.dispatch.dropoff.address.phone}}') {{order.dispatch.dropoff.address.phone | tel}}
+			br 
+			p Instructions: {{order.dispatch.dropoff.instructions.trim().length ? order.dispatch.dropoff.instructions : 'None specified.'}}
+			br
+			
+		.col-xs-12.col-sm-7.col-md-8
+			ui-gmap-google-map(ng-if='map', center='map.center', zoom='map.zoom', options='map.options')
+				ui-gmap-marker(ng-repeat='marker in markers', coords='marker.coords', idkey='marker.id', options='marker.options')
+		

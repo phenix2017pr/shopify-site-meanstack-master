@@ -1,0 +1,46 @@
+header
+	.container.text-center
+		span(class='chef-img', uib-dropdown)
+			img(id='chef-img', class='img-responsive', uib-dropdown-toggle, ng-src='{{user.photo}}')
+			ul(class='uib-dropdown-menu', aria-labelledby='chef-img')
+				li
+					a(ng-click='logout()') Logout
+				li
+					a(ng-click='modalProfile()') Edit Profile
+		.sales Tonight&#x27;s Sales: ${{sales.earnings | number: 2}} ({{sales.count | number}})
+		span.text-next10min {{nextOrders.title}}
+.container.next10min
+	.items
+		span.label(ng-repeat='(id, quantity) in nextOrders.items', class='{{products[id].type | lowercase}}')
+			span.qty(ng-if='quantity > 1') {{quantity}}x
+			span {{products[id].name || '#' + id}}
+		p(ng-show='nextOrders.items | isEmpty' class='text-center') {{nextOrders.noOrders}}
+
+.container.orders(ng-if='orders.length')
+	.order.heading
+		.col.pickup ETA
+		.col.details 
+			span NAME AND ORDER
+			span.pull-right DELIVERY WINDOW
+	
+	.order(ng-repeat='order in orders | orderBy: ["dispatch.after"] | orderByStatus', ng-class='order.status')
+		.col.pickup
+			span(ng-if='order.patchETA === null') -
+			span(class='eta', ng-if='order.patchETA !== null', ng-class='{"warning-5min": order.patchETA <= nowPlus5, "warning-10min": order.patchETA <= nowPlus10 && order.patchETA >= nowPlus5}')
+				span(am-time-ago='order.patchETA', ng-show='order.patchETA > now')
+				span(ng-show='order.patchETA <= now') Now
+			
+		.col.details
+			span.customer(ng-click='modalOrderDetails(order)')
+				img(ng-show="showLightningBolt(order.dispatch.after)", src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAYCAMAAADAi10DAAABlVBMVEVMaXEAAACAgACqVQC/gADMZgCqVQDqVRXddyLxYxzmgBrrhSnriSfrfx3vayHvgCjzcB/5cSTzmirzgCn5eif1jST1jSr6jST1hCf2iyr6giX7gij0iyb4jCv4gCf5myr5jCj5jyz5hij5jyj5gSn5gSf4jir2jCn6eyn9tTL5iSv7gyT5iiv9sy/7gyb7kSr7jSb5lCz7iib7fCf7jyr5fyf5jyf5jiv4lCz4kCz7oy36gyn6jiz6jiz4ky36fCj7mi76my37ni75kCv6sDb6lC/7oS/8oDD8mC38tVb8qU38gCn8gyr7pzf+yED6jiv+zk/7sDz8szv9tTz9vT77nzH+zkf9tDf9tUX7jSv8s1L8qTH9t1L8tj3+1EL9ly/9mzD9mzn9qDb9sT79tDn9tj79uED9u0L9v0f+wUb+w0b+x0v+yFL+y0/+zEv+zVP+1k/+1Vz+2HD+32T+33D+34D+3Jf+4n7+5Ij+4pf+5Yj+5JH+547+55P+5p3+6Jj+6pn+6Z/+7Kr+7LX/7r7/88P/88QPI9eYAAAAX3RSTlMAAQIDBAUGDA8SFBkaGh8gKSsrLC4xMTE0Nzc/REdIT1JSUlJXW2hvcHV3d3h4eXl5enp9f4KCh4qMjZSVl5qhrLvCysvQ0Nzj7vDx9Pb3+fr7+/v7/Pz8/P7+/v7+/kGVcecAAADLSURBVHgBY0AGrHwMaIBJQwRdyNSeCVWA0dgbXZFeojWaiHaUlyCqLqOYMhtUEYOIFk8BFCGz2OZKKxQ1+il1rQG68soKCkoqcmwgIcPw6raGgrys9LTkBB9VkNt0oouaGutra6oqSnM8pIECLFqRoYFBwSF+ccXl+e5SYK+KSYiJiooLaYaV5LoJI1vB4VKY7cSP4gyLjExHXhQRGd9UB04UES7XJDt2VD/bxpuzoorI+pswoopwO6ujhRSzpRp6kEsqoosw86AJAAAtrCPKf4m4kAAAAABJRU5ErkJggg==")
+				|  {{order.customer.first_name}} {{order.customer.last_name}}			
+			span.total-orders {{order.customer.total_orders}}
+			span.delivery-interval.pull-right {{order.dispatch.interval}}
+			.items
+				span.label(ng-repeat='item in order.items', class='{{products[item.id].type | lowercase}}')
+					span.qty(ng-if='item.quantity > 1') {{item.quantity}}x
+					span {{products[item.id].name || '#' + item.id}}
+					
+			div.dispatch
+				button.btn.btn-danger(type='button', ng-disabled='order.status == "dispatching"', ng-if='["pending", "dispatching"].indexOf(order.status) > -1 && dispatchASAP.indexOf(order.id) > -1', ng-click='dispatch(order)') Got it
+				button.btn.btn-primary(type='button', ng-if='["fulfilled", "canceled"].indexOf(order.status) === -1', ng-disabled='order.dispatch.status	== "otw_active"', ng-dblclick='fulfill(order)') Fulfill

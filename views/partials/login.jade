@@ -1,0 +1,20 @@
+.container.auth-form
+	form.well(role='form', name='loginForm', ng-submit='login()')
+		legend 
+			img(src='/media/logo.png', class='logo img-responsive')
+		alert(type='{{alert.type}}', ng-if='alert.message') {{alert.message}}
+		fieldset(ng-disabled='processing')
+			.form-group(show-errors)
+				label(for='email') Email address
+				input#email.form-control(type='email', name='email', placeholder='address@mail.com', ng-model='user.email', required, lowercase)
+			.form-group(show-errors)
+				label(for='password') Password
+				input#password.form-control(type='password', name='password', placeholder='Password', ng-model='user.password', required, password)
+				a.pull-right(ui-sref='recover') Forgot password?
+			.form-group
+				.checkbox
+					label
+						input(type='checkbox', value='1', name='remember', ng-model='user.remember')
+						|  Stay signed in
+			.form-group
+				input.btn.btn-primary.btn-block(type='submit', value='{{processing ? "Please wait.." : "Login"}}', ng-disabled='loginForm.$invalid')

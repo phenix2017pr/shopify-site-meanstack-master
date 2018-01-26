@@ -1,0 +1,31 @@
+{
+  "name": "mealmade",
+  "version": "1.0.0",
+  "authors": [
+    "Dennis V. <dennisvan902@yahoo.com>"
+  ],
+  "license": "ISC",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "angular": "~1.4.7",
+    "angular-socket-io": "~0.7.0",
+    "angular-cookies": "~1.4.7",
+    "angular-ui-router": "~0.2.15",
+    "angular-bootstrap-show-errors": "~2.3.0",
+    "angular-resource": "~1.4.7",
+    "angular-moment": "~0.10.3",
+    "angular-bootstrap": "~0.14.3",
+    "angular-audio": "~1.7.1",
+    "font-awesome": "~4.4.0",
+    "moment-timezone": "~0.4.1",
+    "angular-google-maps": "~2.3.1"
+  }
+}

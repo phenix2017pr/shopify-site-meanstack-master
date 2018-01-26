@@ -1,0 +1,40 @@
+.modal-header
+	button.close(ng-click='cancel()') × 
+	h3.modal-title Edit Profile
+.modal-body
+	form(role='form', name='profileForm', novalidate, autocomplete='off')
+		fieldset(ng-disabled='processing')
+			.form-group(show-errors)
+				label(for='nameFirst') First Name
+				input#nameFirst.form-control(type='text', name='nameFirst', ng-model='user.name.first', required)
+				span.error(ng-show="profileForm.nameFirst.$error.required")
+					| First name is required.
+			.form-group(show-errors)
+				label(for='nameLast') Last Name
+				input#nameLast.form-control(type='text', name='nameLast', ng-model='user.name.last', required)
+				span.error(ng-show="profileForm.nameLast.$error.required")
+					| Last name is required.
+			.form-group(show-errors)
+				label(for='photo') Photo URL
+				input#photo.form-control(type='text', name='photo', ng-model='user.photo', required)
+				span.error(ng-show="profileForm.photo.$error.required")
+					| Photo URL is required.
+					
+			hr
+			p.help-block Leave the following fields empty if you do not wish to change your password.
+			
+			.form-group(show-errors)
+				label(for='password') New Password
+				input#password.form-control(type='password', name='password', ng-model='user.password', password)
+				span.error(ng-show="profileForm.password.$error.password")
+					| Password must be between 8 and 45 characters, and must be a combination of at least one: uppercase, lowercase, numeric, and special (!@#$%^&*) characters.
+			.form-group(show-errors)
+				label(for='password2') Confirm New Password
+				input#password2.form-control(type='password', name='password2', ng-model='password2', compare='user.password')
+				span.error(ng-show="profileForm.password2.$error.compare") Password does not match.
+.modal-footer
+	alert.text-left(type='{{alert.type}}', ng-if='alert.message') {{alert.message}}
+	button.btn.btn-default(ng-click='cancel()') Cancel
+	button.btn.btn-primary(ng-disabled='profileForm.$invalid || processing', ng-click='edit()')
+		i.fa.fa-fw(ng-class='{"fa-save":!processing, "fa-spinner fa-pulse":processing}')
+		|  {{processing ? "Please wait.." : "Update"}}

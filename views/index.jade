@@ -1,0 +1,46 @@
+extends layout
+
+block content
+	main(ng-cloak, ui-view)
+
+	script(src='/socket.io/socket.io.js')
+	script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
+	script(src='/components/bootstrap/dist/js/bootstrap.min.js')
+	script(src='/components/angular/angular.min.js')
+	script(src='/components/angular-socket-io/socket.min.js')
+	script(src='/components/angular-cookies/angular-cookies.min.js')
+	script(src='/components/angular-resource/angular-resource.min.js')
+	script(src='/components/angular-ui-router/release/angular-ui-router.min.js')
+	script(src='/components/angular-bootstrap/ui-bootstrap-tpls.min.js')
+	script(src='/components/angular-bootstrap-show-errors/src/showErrors.min.js')
+	
+	script(src='/components/angular-audio/app/angular.audio.js')
+	
+	script(src='/components/moment/min/moment.min.js')
+	script(src='/components/moment-timezone/builds/moment-timezone-with-data-2010-2020.min.js')
+	script(src='/components/angular-moment/angular-moment.min.js')
+	
+	script(src='/components/lodash/dist/lodash.min.js')
+	script(src='/components/angular-google-maps/dist/angular-google-maps.min.js')
+	script(src='/components/angular-simple-logger/dist/angular-simple-logger.min.js')
+
+	script(src='/js/app.js')
+	script(src='/js/controllers.js')
+	script(src='/js/directives.js')
+	script(src='/js/filters.js')
+	script(src='/js/services.js')
+	
+	script 
+		| window.user = !{user};
+	script(type='text/ng-template', id='login.html')
+		include partials/login
+	script(type='text/ng-template', id='recover.html')
+		include partials/recover
+	script(type='text/ng-template', id='dashboard.html')
+		include partials/dashboard
+	script(type='text/ng-template', id='modal/alarm.html')
+		include partials/modal-alarm
+	script(type='text/ng-template', id='modal/profile.html')
+		include partials/modal-profile
+	script(type='text/ng-template', id='modal/order-details.html')
+		include partials/modal-order-details

@@ -1,0 +1,83 @@
+body{background:#f2f2f2}
+.ng-cloak,.x-ng-cloak,[data-ng-cloak],[ng-cloak],[ng\:cloak],[x-ng-cloak]{display:none}
+a[ng-click]{cursor:pointer}
+span.error{display:none;color:#a94442;font-size:12px;line-height:15px}
+span.error>ul{margin-bottom:0;padding-left:25px}
+.has-error>span.error{display:block}
+.auth-form{width:100%;max-width:380px;margin:40px auto}
+.auth-form .logo{margin-bottom:10px}
+
+/* monkey css-- */
+header:after{content:"";position:absolute;top:30px;right:0;left:0;border-top:1px solid #ececec}
+header .container{position:relative;margin-bottom:5px}
+.chef-img{position:absolute;width:40px;height:40px;left:5px;top:10px;cursor:pointer;z-index:1}
+.chef-img > img{border-radius:100%}
+.sales{font-weight:500;margin:8px 0 3px 0}
+.text-next10min{color:#9f9f9f;font-size:12px;font-weight:500}
+.next10min{padding-left:3px;padding-right:3px}
+
+.items{margin:0 -2px}
+.items .label{display:inline-block;background-color:#777;border:1px solid #5E5E5E;font-size:16px;font-weight:400;border-radius:4px;padding:0;margin:2px}
+.items .label span {padding:2px 5px;position: relative;display:inline-block}
+.items .label .qty{background-color:#5E5E5E;}
+.label.entree{background-color:#ed7d31;border-color:#c55a11;text-shadow: 1px 1px 1px #c55a11}
+.label.entree .qty{background-color:#c55a11}
+.label.dessert{background-color:#4472c4;border-color:#2f5597;text-shadow: 1px 1px 1px #2f5597}
+.label.dessert .qty{background-color:#2f5597}
+.label.appetizer,.label.beverage{background-color:#70ad47;border-color:#548235;text-shadow:1px 1px 1px #548235}
+.label.appetizer .qty,.label.beverage .qty{background-color:#548235}
+.label.side{background-color:#CC9900 ;border-color:#996600;text-shadow: 1px 1px 1px #996600}
+.label.side .qty{background-color:#996600}
+.orders{padding:0;margin-top:5px;margin-bottom:5px}
+.order{display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:-webkit-flex;display:flex}
+.order:not(.heading){background:#fff;border:1px solid #e3e3e3}
+.order:not(:nth-child(2)){border-top-color:transparent}
+.order .pickup{color:#a1a1a1;width:75px;font-size:14px;font-weight:600;display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:-webkit-flex;display:flex;align-items:center;justify-content:center;text-align:center;padding:5px}
+.order .pickup span{display:inline-block;width:100%}
+.order .pickup .eta{color:#008f30;font-size:20px}
+.order .pickup .eta.warning-5min {color: #ff0000}
+.order .pickup .eta.warning-10min {color: #bd8c00}
+.order .details{width:100%;padding:5px 5px 10px 5px}
+.order .customer{color:#191919;font-weight:600;cursor:pointer}
+.order .total-orders,
+.order .delivery-interval{color:#a1a1a1;margin-left:10px}
+.order .dispatch{margin:8px 0 4px 0}
+.order .dispatch .btn-danger{font-weight:500;background:#d81e00;text-shadow:1px 1px 1px #9a1200}
+.order .dispatch .btn-danger:active,.order .dispatch .btn-danger:focus,.order .dispatch .btn-danger:hover{background:#CB1100}
+.order .dispatch .dropdown .btn{color:#d81d00;font-weight:500;border-color:#ee9a88;text-shadow:1px 1px 1px #f8d8d3}
+.order .dispatch .dropdown-menu{min-width:100px}
+.order .dispatch .dropdown{display:inline-block;margin-left:8px}
+.order .dispatch .btn + .btn {margin-left: 10px}
+
+.order.fulfilled .customer{color:#7c7c7c}
+.order.fulfilled .label{color:#7c7c7c;text-shadow:1px 1px 1px #e7e6e6;background-color:#e7e6e6;border-color:#d9d7d7}
+.order.fulfilled .label .qty{background-color:#e2e1e1}
+.order.fulfilled .pickup{font-weight: normal}
+.order.fulfilled .pickup b{color:#7c7c7c}
+.order.canceled .customer{color:#d83e3e}
+.order.canceled .delivery-interval,.order.canceled .total-orders{color:#fe6464}
+.order.heading .details,.order.heading .pickup{color:#a1a1a1;font-size:12px;font-weight:400;padding:5px}
+
+.angular-google-map-container{height: 400px}
+
+@media (min-width: 768px) {
+	header:after{top:47px;border-top-width:2px}
+	header .container{margin-bottom:15px}
+	.chef-img{width:66px;height:66px;top:15px;left:10px}
+	.sales{font-size:24px;margin:10px 0 5px 0}
+	.text-next10min{font-size:20px}
+	.next10min{padding-left:10px;padding-right:10px}
+	.items{margin:0 -4px}
+	.items .label{font-size:22px;margin:4px}
+	.items .label span{padding:4px 10px}
+	.orders{margin-top:10px;margin-bottom:10px}
+	.order .pickup{width:120px;font-size:20px;padding:10px}
+	.order .pickup .eta{font-size:30px}
+	.order .details{font-size:22px;padding:5px 10px}
+	.order .dispatch{margin:10px 0 15px 0}
+	.order .dispatch .btn{font-size:22px}
+	.order .dispatch .dropdown{margin-left:12px}
+	.order .dispatch .dropdown-menu{font-size:20px}
+	
+	.order.heading .details,.order.heading .pickup{font-size:18px;padding:5px 10px}
+}
